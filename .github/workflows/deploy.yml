@@ -14,6 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+          # Step 2: List repository files (optional, for debugging)
+      - name: List repository files
+        run: ls -R
+
       # Step 2: Create test_push folder in the home directory of the remote server
       - name: Copy application folder to server
         uses: appleboy/ssh-action@v0.1.3
