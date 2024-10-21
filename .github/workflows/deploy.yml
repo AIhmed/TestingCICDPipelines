@@ -1,31 +1,26 @@
-name: Deploy to Dev Server
+name: Create test_push Directory
 
 on:
   push:
     branches:
-      - dev
+      - dev  # This will trigger the action when code is pushed to the dev branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
-      # Step 1: Checkout the code
+      # Step 1: Checkout the code (if necessary, but not used here for the directory creation)
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Step 2: Copy files to the development server
-      - name: Copy files to dev server
-        uses: appleboy/scp-action@v0.1.1
+      # Step 2: Create test_push folder in the home directory of the remote server
+      - name: Create test_push folder
+        uses: appleboy/ssh-action@v0.1.3
         with:
-          host: ${{ secrets.AWS_DEV_SERVER_HOST }}
-          username: ${{ secrets.AWS_DEV_SERVER_USER }}
-          key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}   # Private SSH key stored in GitHub Secrets
-          source: |
-            database/
-            resources/
-            app/
-            routes/
-          target: "/home/${{ secrets.AWS_DEV_SERVER_USER }}/"
-          overwrite: true
+          host: ${{ secrets.DEV_SERVER_HOST }}
+          username: ${{ secrets.DEV_SERVER_USER }}
+          key: ${{ secrets.DEV_SERVER_SSH_KEY }}
+          script: |
+            mkdir -p ~/test_push  # Create the folder in the home directory
 
