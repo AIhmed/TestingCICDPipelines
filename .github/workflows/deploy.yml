@@ -10,6 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Setup node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
       # Step 1: Checkout the code (if necessary, but not used here for the directory creation)
       - name: Checkout repository
         uses: actions/checkout@v3
