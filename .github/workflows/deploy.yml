@@ -21,12 +21,8 @@ jobs:
           host: ${{ secrets.AWS_DEV_SERVER_HOST }}
           username: ${{ secrets.AWS_DEV_SERVER_USER }}
           key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
-          source: |
-            database/
-            resources/
-            app/
-            routes/
-          target: /home/ubuntu/  # Target path on the remote server
+          source: database/
+          target: /home/${{ secrets.AWS_DEV_SERVER_SSH_KEY }}/
           recursive: true  # Recursively copy directories
           overwrite: true  # Overwrite existing files
           debug: true      # Enable detailed logging
