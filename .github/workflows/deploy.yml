@@ -31,11 +31,14 @@ jobs:
           host: ${{ secrets.AWS_DEV_SERVER_HOST }}
           username: ${{ secrets.AWS_DEV_SERVER_USER }}
           key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
-          source: ./database/
-          target: /home/ubuntu/test_push
-          recursive: true
-          overwrite: true  # Overwrite existing files
-          debug: true      # Enable detailed logging
+          sync: true
+          args: "-r app/ routes/ database/"
+          target: /home/ubuntu/
+          port: 22
+          timeout: 30s
+          command_timeout: 10m
+          use_insecure_cipher: false
+          debug: true
 
         #- name: Copy to Remote Server
         #  uses: pierrickdelrieu/scp-action@v0.1.0
