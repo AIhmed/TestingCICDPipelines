@@ -27,6 +27,5 @@ jobs:
             app/
             routes/
           target: "/home/${{ secrets.AWS_DEV_SERVER_USER }}/"
-          recursive: true
           overwrite: true
 
