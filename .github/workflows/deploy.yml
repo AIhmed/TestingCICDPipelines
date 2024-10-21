@@ -1,0 +1,32 @@
+name: Deploy to Dev Server
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Copy files to the development server
+      - name: Copy files to dev server
+        uses: appleboy/scp-action@v0.1.1
+        with:
+          host: ${{ secrets.AWS_DEV_SERVER_HOST }}
+          username: ${{ secrets.AWS_DEV_SERVER_USER }}
+          key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}   # Private SSH key stored in GitHub Secrets
+          source: |
+            database/
+            resources/
+            app/
+            routes/
+          target: "/home/${{ secrets.AWS_DEV_SERVER_USER }}/"
+          recursive: true
+          overwrite: true
+
