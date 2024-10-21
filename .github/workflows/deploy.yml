@@ -39,14 +39,41 @@ jobs:
         #     # command_timeout: 10m
         #     # use_insecure_cipher: false
       
-      - name: Copy files
+      - name: Copy database folder
         uses: picodebr/copy-action@v1
         with:
           ssh_host: ${{ secrets.AWS_DEV_SERVER_HOST }}
           ssh_user: ${{ secrets.AWS_DEV_SERVER_USER }}
           ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
           source: database/
-          destination: /home/ubuntu/
+          destination: /home/${{ secrets.AWS_DEV_SERVER_USER }}/database
+
+      - name: Copy app folder
+        uses: picodebr/copy-action@v1
+        with:
+          ssh_host: ${{ secrets.AWS_DEV_SERVER_HOST }}
+          ssh_user: ${{ secrets.AWS_DEV_SERVER_USER }}
+          ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
+          source: app/
+          destination: /home/${{ secrets.AWS_DEV_SERVER_USER }}/app
+
+      - name: Copy routes folder
+        uses: picodebr/copy-action@v1
+        with:
+          ssh_host: ${{ secrets.AWS_DEV_SERVER_HOST }}
+          ssh_user: ${{ secrets.AWS_DEV_SERVER_USER }}
+          ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
+          source: routes/
+          destination: /home/${{ secrets.AWS_DEV_SERVER_USER }}/routes
+
+      - name: Copy resources folder
+        uses: picodebr/copy-action@v1
+        with:
+          ssh_host: ${{ secrets.AWS_DEV_SERVER_HOST }}
+          ssh_user: ${{ secrets.AWS_DEV_SERVER_USER }}
+          ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
+          source: resources/
+          destination: /home/${{ secrets.AWS_DEV_SERVER_USER }}/resources
 
         #- name: Copy to Remote Server
         #  uses: pierrickdelrieu/scp-action@v0.1.0
