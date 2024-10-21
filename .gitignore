@@ -1,0 +1,62 @@
+# Ignore Composer dependencies
+/vendor
+
+# Ignore Laravel environment and cache files
+/.env
+/.env.backup
+/.env.local
+
+# Ignore Laravel package discovery files
+/vendor/composer/installed.json
+
+# Ignore storage and cache directories
+/storage/*.key
+/storage/*.log
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+
+# Ignore node_modules directory
+/node_modules
+
+# Ignore Laravel Mix generated files
+/public/hot
+/public/storage
+/public/mix-manifest.json
+
+# Ignore compiled files
+/bootstrap/cache/*.php
+
+# Ignore IDE-specific directories/files
+/.idea
+/.vscode
+
+# Ignore deployment-related files
+Homestead.yaml
+Homestead.json
+.vagrant
+
+# Ignore user-specific files
+*.swp
+*.swo
+
+# Ignore yarn.lock or package-lock.json if you're using npm or Yarn
+# Uncomment the one you use:
+# /yarn.lock
+# /package-lock.json
+
+# Ignore coverage reports and test artifacts
+/coverage
+/coverage-report
+.phpunit.result.cache
+
+# Ignore logs and debugging artifacts
+*.log
+*.cache
+*.pid
+
+# Ignore any compiled assets or debug output
+*.out
+*.key
+
