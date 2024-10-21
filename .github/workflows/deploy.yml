@@ -25,24 +25,28 @@ jobs:
         run: ls -R
 
         # Step 2: Create test_push folder in the home directory of the remote server
-      - name: Copy application folder to server
-        uses: appleboy/ssh-action@v0.1.10
+        # - name: Copy application folder to server
+        #   uses: appleboy/ssh-action@v0.1.10
+        #   with:
+        #     host: ${{ secrets.AWS_DEV_SERVER_HOST }}
+        #     username: ${{ secrets.AWS_DEV_SERVER_USER }}
+        #     key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
+        #     # sync: true
+        #     # args: "-r app/ routes/ database/"
+        #     # target: /home/ubuntu/
+        #     # port: 22
+        #     # timeout: 30s
+        #     # command_timeout: 10m
+        #     # use_insecure_cipher: false
+      
+      - name: Copy files
+        uses: picodebr/copy-action@v1
         with:
-          host: ${{ secrets.AWS_DEV_SERVER_HOST }}
-          username: ${{ secrets.AWS_DEV_SERVER_USER }}
-          key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
+          ssh_host: ${{ secrets.AWS_DEV_SERVER_HOST }}
+          ssh_user: ${{ secrets.AWS_DEV_SERVER_USER }}
+          ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
           source: database/
-          target: /home/ubuntu/
-          # sync: true
-          # args: "-r app/ routes/ database/"
-          # target: /home/ubuntu/
-          # port: 22
-          # timeout: 30s
-          # command_timeout: 10m
-          # use_insecure_cipher: false
-          recursive: true
-          overwrite: true
-          debug: true
+          destination: /home/ubuntu/
 
         #- name: Copy to Remote Server
         #  uses: pierrickdelrieu/scp-action@v0.1.0
