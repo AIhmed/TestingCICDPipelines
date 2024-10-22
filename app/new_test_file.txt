@@ -3,3 +3,4 @@ just adding lines in this file
 changed github secret configuration
 changed github secret configuration
 changed vms
+new vm with rsa key
