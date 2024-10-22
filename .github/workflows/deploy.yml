@@ -28,14 +28,14 @@ jobs:
           php-version: '8.2'  # Adjust PHP version if necessary
           extensions: mbstring, bcmath, gd, soap, xml, curl
       
-      - name: Copy Vitfe Backend
-        uses: picodebr/copy-action@v1
-        with:
-          ssh_host: ${{ secrets.AWS_DEV_SERVER_HOST }}
-          ssh_user: ${{ secrets.AWS_DEV_SERVER_USER }}
-          ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
-          source: ./*
-          destination: /home/${{ secrets.AWS_DEV_SERVER_USER }}/vitfe-backend
+          #- name: Copy Vitfe Backend
+          #  uses: picodebr/copy-action@v1
+          #  with:
+          #    ssh_host: ${{ secrets.AWS_DEV_SERVER_HOST }}
+          #    ssh_user: ${{ secrets.AWS_DEV_SERVER_USER }}
+          #    ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
+          #    source: ./*
+          #    destination: /home/${{ secrets.AWS_DEV_SERVER_USER }}/vitfe-backend
 
       - name: Copy database folder
         uses: picodebr/copy-action@v1
