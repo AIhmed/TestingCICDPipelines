@@ -1,12 +1,14 @@
 name: Create test_push Directory
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - dev  # This will trigger the action when code is pushed to the dev branch
 
 jobs:
   deploy:
+    if: github.event.pull_request.merged == true  # Ensure the pull request was merged
     runs-on: ubuntu-latest
 
     steps:
@@ -20,24 +22,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-          # Step 2: List repository files (optional, for debugging)
-      - name: List repository files
-        run: ls -R
-
-        # Step 2: Create test_push folder in the home directory of the remote server
-        # - name: Copy application folder to server
-        #   uses: appleboy/ssh-action@v0.1.10
-        #   with:
-        #     host: ${{ secrets.AWS_DEV_SERVER_HOST }}
-        #     username: ${{ secrets.AWS_DEV_SERVER_USER }}
-        #     key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
-        #     # sync: true
-        #     # args: "-r app/ routes/ database/"
-        #     # target: /home/ubuntu/
-        #     # port: 22
-        #     # timeout: 30s
-        #     # command_timeout: 10m
-        #     # use_insecure_cipher: false
       
       - name: Copy database folder
         uses: picodebr/copy-action@v1
@@ -74,16 +58,3 @@ jobs:
           ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
           source: resources/
           destination: /home/${{ secrets.AWS_DEV_SERVER_USER }}/resources
-
-        #- name: Copy to Remote Server
-        #  uses: pierrickdelrieu/scp-action@v0.1.0
-        #  with:
-        #    host: ${{ secrets.AWS_DEV_SERVER_HOST }}
-        #    ssh_username: ${{ secrets.AWS_DEV_SERVER_USER }}
-        #    ssh_key: ${{ secrets.AWS_DEV_SERVER_SSH_KEY }}
-        #    ssh_port: 22
-        #    source_dir: database/
-        #    destination_dir: /home/ubuntu/
-        #    rm: true
-
-
